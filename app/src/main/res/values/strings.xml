@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BookListingApp</string>
+    <string name="search_demo_text">Search for a book and press enter...</string>
+</resources>
