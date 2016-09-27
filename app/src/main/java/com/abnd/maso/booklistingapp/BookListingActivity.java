@@ -11,32 +11,25 @@ public class BookListingActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = BookListingActivity.class.getName();
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_listing);
 
-
         // Create a fake list of earthquake locations.
-        ArrayList<String> list_book = new ArrayList<>();
-        list_book.add("San Francisco");
-        list_book.add("London");
-        list_book.add("Tokyo");
-        list_book.add("Mexico City");
-        list_book.add("Moscow");
-        list_book.add("Rio de Janeiro");
-        list_book.add("Paris");
+        ArrayList<Book> books = new ArrayList<>();
+        books.add  (new Book("Mysql 5.0","This is a good description of the book","Paquigua","2016"));
+        books.add  (new Book("PlanBB 5.0","This is a good description of the PlanBB his is a good description of the PlanBB his is a good description of the PlanBB","Telnor","2016"));
+        books.add  (new Book("Firebase","This is a good description of the Firebase","Ots","2015"));
+        books.add  (new Book("Polymer","This is a good description of the Polymer","Gdg","2016"));
+
+
 
         // Find a reference to the {@link ListView} in the layout
         ListView booklistListView = (ListView) findViewById(R.id.activity_book_listing);
 
-        // Create a new {@link ArrayAdapter} of earthquakes
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_list_item_1, list_book);
+        // Create a new {@link BookAdapter} of earthquakes
+        BookAdapter adapter = new BookAdapter(this,books );
 
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface

@@ -14,19 +14,20 @@
         android:layout_width="56dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/ic_launcher"
+        android:scaleType="fitCenter" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/book_title_textview"
+            android:id="@+id/book_title_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -35,14 +36,14 @@
             tools:text="MySQL 5" />
 
         <TextView
-            android:id="@+id/book_subtitle_textview"
+            android:id="@+id/book_description_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:fontFamily="sans-serif-medium"
-            android:maxLines="2"
-            android:textAllCaps="true"
-            android:textSize="12sp"
+            android:fontFamily="casual"
+            android:textAllCaps="false"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:textSize="10sp"
             tools:text="instalación, implementación, administración, programación" />
 
 
@@ -57,7 +58,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/book_publisher_textview"
+            android:id="@+id/book_publisher_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -65,7 +66,7 @@
             tools:text="Ediciones ENI" />
 
         <TextView
-            android:id="@+id/book_publish_date_textview"
+            android:id="@+id/book_publish_date_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
