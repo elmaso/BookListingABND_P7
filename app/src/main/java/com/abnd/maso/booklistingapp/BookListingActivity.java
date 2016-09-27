@@ -17,13 +17,7 @@ public class BookListingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book_listing);
 
         // Create a fake list of earthquake locations.
-        ArrayList<Book> books = new ArrayList<>();
-        books.add  (new Book("Mysql 5.0","This is a good description of the book","Paquigua","2016"));
-        books.add  (new Book("PlanBB 5.0","This is a good description of the PlanBB his is a good description of the PlanBB his is a good description of the PlanBB","Telnor","2016"));
-        books.add  (new Book("Firebase","This is a good description of the Firebase","Ots","2015"));
-        books.add  (new Book("Polymer","This is a good description of the Polymer","Gdg","2016"));
-
-
+        ArrayList<Book> books = QueryUtils.extractBooks();
 
         // Find a reference to the {@link ListView} in the layout
         ListView booklistListView = (ListView) findViewById(R.id.activity_book_listing);

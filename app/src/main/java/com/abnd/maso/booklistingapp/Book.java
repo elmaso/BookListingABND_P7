@@ -18,6 +18,12 @@ public class Book {
     private String mBookPublisher;
     private String mBooKPublishDate;
 
+    public Book(String mBookTitle, String mBookAuthor, String mBooKPublishDate) {
+        this.mBookTitle = mBookTitle;
+        this.mBookAuthor = mBookAuthor;
+        this.mBooKPublishDate = mBooKPublishDate;
+    }
+
     public String getBookImageURL() {
         return mBookImageURL;
     }
@@ -43,7 +49,6 @@ public class Book {
     }
 
     public Book(String bookTitle, String bookDescription, String bookPublisher, String booKPublishDate) {
-
         this.mBookTitle = bookTitle;
         this.mBookDescription = bookDescription;
         this.mBookPublisher = bookPublisher;

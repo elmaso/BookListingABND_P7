@@ -50,10 +50,10 @@ public class BookAdapter extends ArrayAdapter<Book> {
         titleView.setText(currentBook.getBookTitle());
 
         TextView subTitleView = (TextView) listItemView.findViewById(R.id.book_description_text_view);
-        subTitleView.setText(currentBook.getBookSubTitle());
+        subTitleView.setText(currentBook.getBookAuthor());
 
-        TextView publisherView = (TextView) listItemView.findViewById(R.id.book_publisher_text_view);
-        publisherView.setText(currentBook.getBookPublisher());
+        //TextView publisherView = (TextView) listItemView.findViewById(R.id.book_publisher_text_view);
+        //publisherView.setText(currentBook.getBookPublisher());
 
         TextView publishDateView = (TextView) listItemView.findViewById(R.id.book_publish_date_text_view);
         publishDateView.setText(currentBook.getBooKPublishDate());
