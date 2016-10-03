@@ -11,10 +11,7 @@ public class Book {
 
     private String mBookTitle;
     private String mBookDescription;
-
-    // TODO: 9/26/16 Fix book_item to include Author
     private String mBookAuthor;
-
     private String mBookPublisher;
     private String mBooKPublishDate;
 
@@ -32,7 +29,7 @@ public class Book {
         return mBookTitle;
     }
 
-    public String getBookSubTitle() {
+    public String getmBookDescription() {
         return mBookDescription;
     }
 
@@ -48,10 +45,10 @@ public class Book {
         return mBooKPublishDate;
     }
 
-    public Book(String bookTitle, String bookDescription, String bookPublisher, String booKPublishDate) {
+    public Book(String bookTitle, String bookDescription, String bookAuthor, String booKPublishDate) {
         this.mBookTitle = bookTitle;
         this.mBookDescription = bookDescription;
-        this.mBookPublisher = bookPublisher;
+        this.mBookAuthor = bookAuthor;
         this.mBooKPublishDate = booKPublishDate;
     }
 }
