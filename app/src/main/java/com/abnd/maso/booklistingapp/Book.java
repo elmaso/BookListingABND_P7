@@ -1,5 +1,7 @@
 package com.abnd.maso.booklistingapp;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by mariosoberanis on 9/26/16.
  */
@@ -7,7 +9,7 @@ package com.abnd.maso.booklistingapp;
 public class Book {
 
     // TODO: 9/26/16  Well implement the image using PICASO or GLIDE in future version
-    private String mBookImageURL;
+    private Bitmap mBookThumbnail;
 
     private String mBookTitle;
     private String mBookDescription;
@@ -19,10 +21,18 @@ public class Book {
         this.mBookTitle = mBookTitle;
         this.mBookAuthor = mBookAuthor;
         this.mBooKPublishDate = mBooKPublishDate;
+
     }
 
-    public String getBookImageURL() {
-        return mBookImageURL;
+    public Book(String bookTitle, String bookDescription, String bookAuthor, String booKPublishDate) {
+        this.mBookTitle = bookTitle;
+        this.mBookDescription = bookDescription;
+        this.mBookAuthor = bookAuthor;
+        this.mBooKPublishDate = booKPublishDate;
+    }
+
+    public Bitmap getBookImageURL() {
+        return mBookThumbnail;
     }
 
     public String getBookTitle() {
@@ -43,12 +53,5 @@ public class Book {
 
     public String getBooKPublishDate() {
         return mBooKPublishDate;
-    }
-
-    public Book(String bookTitle, String bookDescription, String bookAuthor, String booKPublishDate) {
-        this.mBookTitle = bookTitle;
-        this.mBookDescription = bookDescription;
-        this.mBookAuthor = bookAuthor;
-        this.mBooKPublishDate = booKPublishDate;
     }
 }
