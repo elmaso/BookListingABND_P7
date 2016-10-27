@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">BookListingApp</string>
-    <string name="search_demo_text">Search for a book and press enter...</string>
+    <string name="search_demo_text">Search for a book</string>
     <string name="no_books">"No Books found sorry "</string>
     <string name="no_internet">Sorry no Internet connection.</string>
+    <string name="search">Search</string>
+    <string name="pleace_type">Please type something</string>
 </resources>

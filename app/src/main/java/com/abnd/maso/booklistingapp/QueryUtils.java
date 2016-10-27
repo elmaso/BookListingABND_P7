@@ -1,5 +1,7 @@
 package com.abnd.maso.booklistingapp;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -191,12 +193,19 @@ public final class QueryUtils {
                 String publishedDate = volumeInfo.getString("publishedDate");
 
                 //Extract the thumbnail URL for future version
+                Bitmap images_thumb = null;
                 if (volumeInfo.has("imageLinks")) {
                     String image_link = volumeInfo.getJSONObject("imageLinks").getString("thumbnail");
+                    try {
+                        InputStream images = new URL(image_link).openStream();
+                        images_thumb = BitmapFactory.decodeStream(images);
+                    } catch (Exception e) {
+                        Log.e(LOG_TAG, "Error Images");
+                    }
                 }
 
                 //We create a new Book and add JSON values
-                Book book = new Book(title, description, author, publishedDate);
+                Book book = new Book(title, description, author, publishedDate, images_thumb);
                 booksArray.add(book);
 
             }

@@ -8,27 +8,20 @@ import android.graphics.Bitmap;
 
 public class Book {
 
-    // TODO: 9/26/16  Well implement the image using PICASO or GLIDE in future version
-    private Bitmap mBookThumbnail;
 
+    private Bitmap mBookThumbnail;
     private String mBookTitle;
     private String mBookDescription;
     private String mBookAuthor;
-    private String mBookPublisher;
+
     private String mBooKPublishDate;
 
-    public Book(String mBookTitle, String mBookAuthor, String mBooKPublishDate) {
-        this.mBookTitle = mBookTitle;
-        this.mBookAuthor = mBookAuthor;
-        this.mBooKPublishDate = mBooKPublishDate;
-
-    }
-
-    public Book(String bookTitle, String bookDescription, String bookAuthor, String booKPublishDate) {
+    public Book(String bookTitle, String bookDescription, String bookAuthor, String booKPublishDate, Bitmap bookThumbnail) {
         this.mBookTitle = bookTitle;
         this.mBookDescription = bookDescription;
         this.mBookAuthor = bookAuthor;
         this.mBooKPublishDate = booKPublishDate;
+        this.mBookThumbnail = bookThumbnail;
     }
 
     public Bitmap getBookImageURL() {
@@ -45,10 +38,6 @@ public class Book {
 
     public String getBookAuthor() {
         return mBookAuthor;
-    }
-
-    public String getBookPublisher() {
-        return mBookPublisher;
     }
 
     public String getBooKPublishDate() {

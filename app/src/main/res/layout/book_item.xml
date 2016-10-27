@@ -2,16 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:layout_height="64dip"
+    android:layout_margin="@dimen/activity_vertical_margin"
     android:orientation="horizontal"
-    android:paddingEnd="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingStart="16dp">
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
 
     <ImageView
         android:id="@+id/book_image_view"
-        android:layout_width="56dp"
+        android:layout_width="@dimen/images_width"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:scaleType="fitCenter"
@@ -32,20 +31,17 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textSize="16sp"
-            tools:text="MySQL 5" />
+            android:textSize="@dimen/large_text" />
 
         <TextView
             android:id="@+id/book_description_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:ellipsize="end"
             android:fontFamily="casual"
             android:textAllCaps="false"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:textSize="10sp"
-            tools:text="instalación, implementación, administración, programación" />
-
+            android:textSize="@dimen/medium_text" />
 
     </LinearLayout>
 
@@ -62,16 +58,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:textSize="12sp"
-            tools:text="Ediciones ENI" />
+            android:textSize="@dimen/medium_text" />
 
         <TextView
             android:id="@+id/book_publish_date_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:textSize="12sp"
+            android:textSize="@dimen/medium_text"
             tools:text="2016" />
 
     </LinearLayout>
+
 </LinearLayout>
