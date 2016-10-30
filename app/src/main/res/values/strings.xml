@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">BookListingApp</string>
     <string name="search_demo_text">Search for a book</string>
-    <string name="no_books">"No Books found sorry "</string>
-    <string name="no_internet">Sorry no Internet connection.</string>
+    <string name="no_books">"The elf could't find any Books sorry :( please try another search query "</string>
+    <string name="no_internet">Sorry no Internet connection.\n(Elf\'s run on Internet power)</string>
     <string name="search">Search</string>
-    <string name="pleace_type">Please type something</string>
+    <string name="please_type">"Please type something, don\'t confuse the Elf\'s  :)"</string>
+    <string name="welcome_text">"Welcome friend to get started just search for a book and will send some elf's to find it... "</string>
+    <string name="searching">elf\'s working....</string>
 </resources>

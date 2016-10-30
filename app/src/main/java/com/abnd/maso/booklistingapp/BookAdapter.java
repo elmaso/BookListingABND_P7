@@ -30,7 +30,7 @@ public class BookAdapter extends ArrayAdapter<Book> {
      * Returns a list item view that displays information about a book at the given position
      * in the list of books.
      */
-
+//// TODO: 10/30/16 refactor to use ViewHolder and Recycler View 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 

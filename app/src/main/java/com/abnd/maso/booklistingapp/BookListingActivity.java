@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,15 +26,21 @@ public class BookListingActivity extends AppCompatActivity
         implements LoaderCallbacks<List<Book>> {
 
     private static final String LOG_TAG = BookListingActivity.class.getName();
+
+    //Connection variables
     private static final String BOOKS_REQUEST_URL = "https://www.googleapis.com/books/v1/volumes?q=";
     private int BOOK_LOADER_ID = 1;
+    private ConnectivityManager cm;
+    private NetworkInfo networkInfo;
+    private LoaderManager lm;
+
+    //UI variables elements
     private BookAdapter mAdapter;
-    private Button mSearch;
     private EditText mQueryBook;
     private String mSearchQuery;
-
     private TextView mEmptyStateTextView;
     private View mLoadingIndicator;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +49,9 @@ public class BookListingActivity extends AppCompatActivity
 
         ListView bookListView = (ListView) findViewById(R.id.activity_book_listing);
 
+        // TODO: 10/30/16 incorporate ButterKnife library
+
         mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
-        mSearch = (Button) findViewById(R.id.search_btn);
         mQueryBook = (EditText) findViewById(R.id.search_text_input);
         mLoadingIndicator = findViewById(R.id.loading_indicator);
 
@@ -54,61 +60,56 @@ public class BookListingActivity extends AppCompatActivity
         mAdapter = new BookAdapter(this, new ArrayList<Book>());
         bookListView.setAdapter(mAdapter);
 
+
         // Get a reference to the ConnectivityManager to check state of network connetivity
-        ConnectivityManager connectivityManager = (ConnectivityManager)
+        cm = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
 
         //Get details on the currently active default data network
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        networkInfo = cm.getActiveNetworkInfo();
 
         // If there is a network connection, fetch data
         if (networkInfo != null && networkInfo.isConnected()) {
-            LoaderManager loaderManager = getLoaderManager();
-            loaderManager.initLoader(BOOK_LOADER_ID, null, this);
-            mLoadingIndicator.setVisibility(View.VISIBLE);
-
+            lm = getLoaderManager();
+            lm.initLoader(BOOK_LOADER_ID, null, this);
         } else {
             mLoadingIndicator.setVisibility(View.GONE);
             mEmptyStateTextView.setText(R.string.no_internet);
         }
 
+    }
 
-        mSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    public void SearchBook(View v) {
 
-                String query = mQueryBook.getText().toString().replaceAll(" ", "+");
-                if (query.isEmpty()) {
-                    Toast.makeText(BookListingActivity.this, R.string.pleace_type, Toast.LENGTH_LONG).show();
-                    return;
-                }
-                // TODO: 10/26/16  add maxResult to sharepreferences
-                query = BOOKS_REQUEST_URL + query + "&maxResults=15";
-                mSearchQuery = query;
+        // We only start searching if there's a valid string
+        String query = mQueryBook.getText().toString().replaceAll(" ", "+");
+        if (query.isEmpty()) {
+            Toast.makeText(this, R.string.please_type, Toast.LENGTH_LONG).show();
+            mEmptyStateTextView.setText(R.string.please_type);
+            return;
+        }
 
-                // Get a refrece to the ConnectivityManager to check state of network connetivity
-                ConnectivityManager connectivityManager = (ConnectivityManager)
-                        getSystemService(Context.CONNECTIVITY_SERVICE);
+        // We prepare the new URL   //// TODO: 10/30/16 research on implementing this using SerchView instead
+        query = BOOKS_REQUEST_URL + query + "&maxResults=15";
+        mSearchQuery = query;
+        Log.i(LOG_TAG, mSearchQuery);
 
-                //Get details on the currently active default data network
-                NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-
-                // If there is a network connection, fetch data
-                if (networkInfo != null && networkInfo.isConnected()) {
-                    LoaderManager loaderManager = getLoaderManager();
-                    loaderManager.restartLoader(BOOK_LOADER_ID, null, BookListingActivity.this);
-                    mEmptyStateTextView.setText("");
-                    //Starting a new search lest update the UI
-                    mAdapter.clear();
-                    mLoadingIndicator.setVisibility(View.VISIBLE);
-                } else {
-                    mLoadingIndicator.setVisibility(View.GONE);
-                    mEmptyStateTextView.setText(R.string.no_internet);
-                }
-
-            }
-
-        });
+        // If there is a network connection, fetch data
+        //Get details on the currently active default data network
+        networkInfo = cm.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            lm = getLoaderManager();
+            lm.restartLoader(BOOK_LOADER_ID, null, BookListingActivity.this);
+            //Starting a new search lest update the UI
+            mAdapter.clear();
+            mEmptyStateTextView.setText(R.string.searching);
+            mLoadingIndicator.setVisibility(View.VISIBLE);
+        } else {
+            mLoadingIndicator.setVisibility(View.GONE);
+            mEmptyStateTextView.setText(R.string.no_internet);
+            mAdapter.clear();
+            return;
+        }
 
     }
 
@@ -116,15 +117,12 @@ public class BookListingActivity extends AppCompatActivity
     public Loader<List<Book>> onCreateLoader(int i, Bundle bundle) {
         Log.i(LOG_TAG, "TEST: onCreateLoader");
         return new BookLoader(this, mSearchQuery);
-
     }
 
     @Override
     public void onLoadFinished(Loader<List<Book>> loader, List<Book> books) {
-
         mLoadingIndicator.setVisibility(View.GONE);
         mQueryBook.clearFocus();
-
         // Clear the adapter of previous earthquake data
         mAdapter.clear();
 
@@ -132,6 +130,9 @@ public class BookListingActivity extends AppCompatActivity
         // data set. This will trigger the ListView to update.
         if (books != null && !books.isEmpty()) {
             mAdapter.addAll(books);
+        } else if (mSearchQuery == null) {
+            //Give new user instructions
+            mEmptyStateTextView.setText(R.string.welcome_text);
         } else {
             //Set empty state text to display "No Books Found".
             mEmptyStateTextView.setText(R.string.no_books);
@@ -143,6 +144,14 @@ public class BookListingActivity extends AppCompatActivity
     public void onLoaderReset(Loader<List<Book>> loader) {
         Log.i(LOG_TAG, "TEST: onResetLoader");
         mAdapter.clear();
+        if (mSearchQuery == null) {
+            //Give new user instructions
+            mEmptyStateTextView.setText(R.string.welcome_text);
+        } else {
+            //Set empty state text to display "No Books Found".
+            mEmptyStateTextView.setText(R.string.no_books);
+        }
+
     }
 
 }

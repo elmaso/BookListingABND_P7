@@ -30,6 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="SearchBook"
             android:text="@string/search" />
     </LinearLayout>
 
@@ -48,6 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:padding="@dimen/activity_horizontal_margin"
         android:textAppearance="?android:textAppearanceMedium" />
 
     <!-- Loading indicator is only shown before the first load -->
