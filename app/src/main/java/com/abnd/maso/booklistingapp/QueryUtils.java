@@ -95,9 +95,11 @@ public final class QueryUtils {
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
+
             // If the request was succesful (response code 200),
             //then read the infput stream and parse the response
             if (urlConnection.getResponseCode() == 200) {
+                Log.i(LOG_TAG, "Got good ResponseCode");
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
             } else {
